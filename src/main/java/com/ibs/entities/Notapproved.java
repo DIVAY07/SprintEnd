@@ -17,7 +17,6 @@ public class Notapproved {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int accNo;
 	
-	
 	private String firstName;
 	private String lastName;
 	private String mobile;

@@ -34,7 +34,7 @@ public class AccountDto{
 	@Size(min = 6 , message = "Password must be of atleast 6 characters")
 	private String transPass;
 	
-//	private ArrayList<Integer> benefs = new ArrayList<Integer>();
+
 
 	
 	

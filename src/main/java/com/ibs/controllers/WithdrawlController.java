@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ibs.entities.User1;
 import com.ibs.entities.WithdrawRequest;
+import com.ibs.repositories.UserRepo;
 import com.ibs.services.impl.UserServiceImpl;
 
 import jakarta.validation.Valid;
@@ -18,10 +19,13 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
-public class withdrawl {
+public class WithdrawlController {
 
 	@Autowired
 	public UserServiceImpl userService;
+	
+	@Autowired
+	public UserRepo userrepo;
 	
 	
 	@PostMapping("/userDashboard/withdrawl/{userId}")
@@ -33,6 +37,8 @@ public class withdrawl {
 //		 System.out.println(user.getAccBalance());
 //		 Integer newbal = (user.getAccBalance() - amount.getValue());
 		 user.setAccBalance((user.getAccBalance() - amount.getValue()));
+		 userrepo.save(user);
+		 
 //		 System.out.println(user.getAccBalance());
 		 return new ResponseEntity<>(user,HttpStatus.CREATED);
 	  }

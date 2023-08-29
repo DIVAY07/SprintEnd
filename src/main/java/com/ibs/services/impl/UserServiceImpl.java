@@ -44,16 +44,14 @@ public class UserServiceImpl implements UserService {
 		Notapproved nap =  this.NotapprovedRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User", "Id", userId));
 		this.NotapprovedRepo.delete(nap);
 		
-		
 		return savedUser;
 	}
 
 	@Override
 	public Notapproved createdemo(Notapproved na) {
 		// TODO Auto-generated method stub
-//		Notapproved user = this.dtoToUser(userDto);
+
 		na.setAccBalance(500);
-//		user.setIsApproved(0);
 		Notapproved savedUser = this.NotapprovedRepo.save(na);
 		return savedUser;
 	}
@@ -71,7 +69,6 @@ public class UserServiceImpl implements UserService {
 		user.setPanNo(userDto.getPanNo());
 		user.setDob(null);
 		
-		
 		User1 updatedUser = this.userRepo.save(user);
 		User1Dto userDto1 = this.userToDto(updatedUser);
 		return userDto1;
@@ -86,6 +83,7 @@ public class UserServiceImpl implements UserService {
 		return (user);
 	}
 
+	
 	@Override
 	public List<User1> getAllUsersApproved() {
 		// TODO Auto-generated method stub
@@ -94,19 +92,14 @@ public class UserServiceImpl implements UserService {
 		return users;
 	}
 //	
+	
 	@Override
 	public List<Notapproved> getAllUsersRequested() {
 		// TODO Auto-generated method stub
 		List<Notapproved> users = this.NotapprovedRepo.findAll();
-//		List<User1Dto> userDtos=users.stream().map(user->this.userToDto(user)).collect(Collectors.toList());
 		return users;
 	}
-//	@Override
-//	public User1 changeApproval(User1 user1)
-//	{
-//		user1.setIsApproved(1);
-//		return user1;
-//	}
+
 
 	@Override
 	public void deleteUser(Integer userId) {
@@ -131,11 +124,6 @@ public class UserServiceImpl implements UserService {
 		User1Dto userDto = this.modelMapper.map(user, User1Dto.class);
 		return userDto;
     }
-//
-//	@Override
-//	public List<User1Dto> getAllUsers() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+
 
 }

@@ -21,6 +21,7 @@ public class HomeController {
 		return "getting users";
 	}
 	
+	
 	@GetMapping("/current-users")
 	public String getLoggedInUser(Principal principal)
 	{

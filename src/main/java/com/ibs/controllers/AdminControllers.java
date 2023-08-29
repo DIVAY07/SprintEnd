@@ -40,26 +40,25 @@ public class AdminControllers {
 		return ResponseEntity.ok(this.userService.getAllUsersRequested());
 	}
 	
-@GetMapping("/userlist_approved")
+	@GetMapping("/userlist_approved")
 	public ResponseEntity<List<User1>> getAllUsersthatareApp()
 	{
 		return ResponseEntity.ok(this.userService.getAllUsersApproved());
 	}
 	
-@PostMapping("/userlist_requested")
+	@PostMapping("/userlist_requested")
 	public ResponseEntity<User1> approveRequest(@Valid@RequestBody Notapproved request)
 	{
 		User1 user = this.userService.createUser(request);
 		return new ResponseEntity<>(user,HttpStatus.CREATED);
 		
 	}
-@DeleteMapping("/userlist_requested/{userId}")
-
-public ResponseEntity<ApiResponse> deleteUser(@PathVariable("userId") Integer uid)
-{
-	this.userService.deleteUser(uid);
-	return new ResponseEntity<ApiResponse>(new ApiResponse("User deleted Successfully" , true),HttpStatus.OK);
-}
+	@DeleteMapping("/userlist_requested/{userId}")
+	public ResponseEntity<ApiResponse> deleteUser(@PathVariable("userId") Integer uid)
+	{
+		this.userService.deleteUser(uid);
+		return new ResponseEntity<ApiResponse>(new ApiResponse("User deleted Successfully" , true),HttpStatus.OK);
+	}
 
 
 

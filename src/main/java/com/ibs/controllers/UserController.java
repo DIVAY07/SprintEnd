@@ -48,6 +48,8 @@ public class UserController {
 	@Autowired
 	private UserRepo userrepo;
 	
+	
+	
 	@PostMapping("/openaccount")
 	public ResponseEntity<Notapproved> createDemo(@Valid @RequestBody Notapproved notapproved)
 	{	
@@ -80,14 +82,8 @@ public class UserController {
 	}
 	
 	
-//	@PostMapping("/openaccounat")
-//	public ResponseEntity<User1Dto> createUser(@Valid @RequestBody User1Dto userDto)
-//	{	
-//		User1Dto createUserDto = this.userService.createUser(userDto);
-//		return new ResponseEntity<>(createUserDto, HttpStatus.CREATED);
-//	}
 	
-	
+		
 	@PutMapping("/{userId}")
 	public ResponseEntity<User1Dto> updateUser(@Valid @RequestBody User1Dto userDto , @PathVariable("userId") Integer uid)
 	{
@@ -95,41 +91,9 @@ public class UserController {
 		return ResponseEntity.ok(updatedUser);
 	}
 	
-//	@DeleteMapping("/{userId}")
-//	
-//	public ResponseEntity<?> deleteUser(@PathVariable("userId") Integer uid)
-//	{
-//		this.userService.deleteUser(uid);
-//		return new ResponseEntity<ApiResponse>(new ApiResponse("User deleted Successfully" , true),HttpStatus.OK);
-//	}
 	
 	
-//	
-//	@GetMapping("/admin/userlist_approved")
-//	public ResponseEntity<List<User1>> getAllUsersthatareApp()
-//	{
-//		return ResponseEntity.ok(this.userService.getAllUsersApproved(1));
-//	}
-//	
-//	@GetMapping("admin/userlist_requested")
-//	public ResponseEntity<List<User1>> getAllUsersthatareReq()
-//	{
-//		return ResponseEntity.ok(this.userService.getAllUsersRequested(0));
-//	}
-	
-//	@PostMapping("admin/userlist_requested")
-//	public ResponseEntity<User1> updateapproval (@Valid@RequestBody User1Dto user)
-//	{
-//		User1 use_new = this.userService.D
-//			
-//		User1 user1 = this.userService.getUserById(user_new.getAccNo());
-////		System.out.println("User " : user1.ge);
-//		User1 user2 = this.userService.changeApproval(user1);
-//		
-//		return new ResponseEntity<>(user2, HttpStatus.CREATED);
-//		
-//		
-//	}
+
 	@GetMapping("/{userId}")
 	public ResponseEntity<User1> getSingleUser(@PathVariable("userId") Integer uid)
 	{

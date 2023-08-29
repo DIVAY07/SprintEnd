@@ -62,12 +62,14 @@ public class AccountController{
 	private AuthenticationManager manager;
 	
 	@Autowired
+	private AccountServiceImpl accountService;
+	
+	@Autowired
 	private JwtHelper helper;
 	
 	private Logger logger = LoggerFactory.getLogger(AccountController.class);
 	
-	@Autowired
-	private AccountServiceImpl accountService;
+
 	
 	 @PostMapping("/login")
 	    public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
@@ -93,32 +95,17 @@ public class AccountController{
 	        }
 
 	    }
-	    
-//	    @GetMapping("/userDashboard?{userId}")
-//	    public ResponseEntity<User1Dto> getSingleUser(@PathVariable("userId") String userId)
-//		{
-//			AccountDto acc = accservice.getUserById(userId);
-//	    	return ResponseEntity.ok(this.userService.getUserById(acc.getAccNo()));
-//		}
 
 	    @ExceptionHandler(BadCredentialsException.class)
 	    public String exceptionHandler() {
 	        return "Credentials Invalid !!";
 	    }
 	    
-	@GetMapping("/accountDetails")
-	public String showAccountDetails()
-	{
-		return "Welcome to the Account Details page for the user";
-	}
+	
 	
 
 	
-	@GetMapping("/test")
-	public String testing()
-	{
-		return "Welcome you are in the testing phase";
-	}
+
 	@PostMapping("/register")
 	public ResponseEntity<AccountDto> createAccount(@Valid @RequestBody AccountDto accountDto)
 	{

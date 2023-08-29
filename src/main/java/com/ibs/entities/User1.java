@@ -16,11 +16,9 @@ import lombok.Setter;
 //@Setter
 public class User1 {
 	
-//	@SequenceGenerator(name="SEQ_GEN", sequenceName="SEQ_JUST_FOR_TEST", allocationSize=100)
-//	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_GEN")
+
 
 	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int accNo;
 	
 	
@@ -31,6 +29,8 @@ public class User1 {
 	private String aadharNo;
 	private String panNo;
 	private String dob;
+	
+	
 	public int getAccNo() {
 		return accNo;
 	}
@@ -86,28 +86,7 @@ public class User1 {
 		this.accBalance = accBalance;
 	}
 	private int accBalance;
-//	private int isApproved;
-//	
-//	
-//	public void setIsApproved(Integer val)
-//	{
-//		this.isApproved = val;
-//		
-//	}
-//	
-//	public int getIsApproved()
-//	{
-//		return this.isApproved;
-//	}
-//	
-	
-//	@Column(columnDefinition = "boolean default false")
-//	private boolean isApproved;
-	
-//	@OneToOne(mappedBy = "user1")
-////	@JsonBackReference
-//	private Account account;
-	
+
 	
 		
 }

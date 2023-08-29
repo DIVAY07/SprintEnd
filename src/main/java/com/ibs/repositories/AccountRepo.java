@@ -9,7 +9,6 @@ import com.ibs.entities.Account;
 
 public interface AccountRepo extends JpaRepository<Account, String>{
 public Account findByUserId(String userId);
-//public Optional<Boolean> existsById(Integer t);
 public Optional<Account> findById(String user);
 public Optional<Account>findByuserId(String user);
 }

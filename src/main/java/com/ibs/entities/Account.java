@@ -36,13 +36,9 @@ public class Account implements UserDetails{
 	private String userId;
 	
 	private int accNo;
-//	@OneToOne(cascade = CascadeType.ALL)
-////	@JsonManagedReference
-//	private User1 user1;
-	
 	private String loginPass;
 	private String transPass;
-//	private List<Integer> benefs = new ArrayList<>(List.of(0));
+
 	
 	
 	@Override

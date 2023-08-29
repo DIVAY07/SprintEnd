@@ -1,6 +1,5 @@
 package com.ibs.controllers;
 
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -51,7 +50,6 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api")
 
-
 public class DashboardController {
 
 	@Autowired
@@ -60,11 +58,7 @@ public class DashboardController {
 	private UserServiceImpl userService;
 	
 	@Autowired
-	private UserRepo userrepo;
-	
-	
-	
-	
+	private UserRepo userrepo;	
 	
 	@Autowired
 	private ModelMapper modelMapper;
@@ -72,20 +66,19 @@ public class DashboardController {
 	@Autowired
 	private AccountServiceImpl accService;
 	
-	  @GetMapping("/userDashboard/{userId}")
-	    public ResponseEntity<User1> getSingleUser(@PathVariable("userId") String userId)
-		{
-			Account acc = accService.getUserById(userId);
-	    	return ResponseEntity.ok(this.userService.getUserById(acc.getAccNo()));
-		}
+	@GetMapping("/userDashboard/{userId}")
+	public ResponseEntity<User1> getSingleUser(@PathVariable("userId") String userId)
+	{
+		Account acc = accService.getUserById(userId);
+	    return ResponseEntity.ok(this.userService.getUserById(acc.getAccNo()));
+	}
 	  
 	  
-	  @PostMapping("/userDashboard/fundTransfer/{userId}")
-	  public ResponseEntity<TransactionsDto> CreateTrans(@Valid @RequestBody TransactionsDto trans, @PathVariable("userId") String userId)
+	 @PostMapping("/userDashboard/fundTransfer/{userId}")
+	 public ResponseEntity<TransactionsDto> CreateTrans(@Valid @RequestBody TransactionsDto trans, @PathVariable("userId") String userId)
 	  {	
 		  User1 current = this.userService.getUserById(trans.getPayer());
-//		  User1 current1 = this.userService.getUserById(trans.getReceiver());
-		  
+
 		  List<benefs> allowed = this.transService.getByAccNo(trans.getPayer());
 		  
 		  boolean present = false;
@@ -102,16 +95,7 @@ public class DashboardController {
 			  throw new ResourceNotFoundException("Receiver Not Found", "in beneficiary", trans.getReceiver());
 		  }
 		  
-//		  List<Integer> benefs = this.accService.getUserById(userId).getBenefs();
-//		  
-////		  Optional<User1> current1 = this.userrepo.findByaccNo(trans.getReceiver());
-//			if(benefs.contains(trans.getReceiver()) == false)
-//			{
-//				System.out.println("receiver not in beneficiaries");
-//				throw new ResourceNotFoundException("Receiver Not Found", "in beneficiary", trans.getReceiver());
-//			}
-		  
-			 if(current.getAccNo()== trans.getReceiver())
+		  if(current.getAccNo()== trans.getReceiver())
 		  {
 			  System.out.println("Same payer and receiver");
 			  throw new ResourceNotFoundException("Account number", "same , can't pay", current.getAccNo());
@@ -122,37 +106,25 @@ public class DashboardController {
 			  System.out.println("Insufficient Balance");
 			  throw new ResourceNotFoundException("Insufficient Balance", "Pls Add Money", current.getAccNo());
 		  }
+		  
 		  else {
 			  User1 current12 = this.userService.getUserById(trans.getReceiver());
-		  current.setAccBalance(current.getAccBalance() - trans.getAmount());
-		  current12.setAccBalance( current12.getAccBalance()+ trans.getAmount());
+			  current.setAccBalance(current.getAccBalance() - trans.getAmount());
+			  current12.setAccBalance( current12.getAccBalance() + trans.getAmount());
+			  userrepo.save(current);
+			  userrepo.save(current12);
+			  
 		  
-		  TransactionsDto createdTrans = this.transService.createTrans(trans);
-
-	 
-		  return new ResponseEntity<>(createdTrans, HttpStatus.CREATED);
+			  TransactionsDto createdTrans = this.transService.createTrans(trans);
+			  return new ResponseEntity<>(createdTrans, HttpStatus.CREATED);
 		  }
 	  }
 	  
 	  
 	  
-//	  @PostMapping("/userDashboard/withdrawl/{userId}")
-//	  public ResponseEntity<User1> withdrawamount(@Valid @RequestBody WithdrawRequest amount)
-//	  {
-//	
-//
-//		 User1 user = this.userService.getUserById(amount.getAccNo());
-//		 Integer newbal = (user.getAccBalance() - amount.getValue());
-//		 user.setAccBalance(newbal);
-//		 
-//		 return new ResponseEntity<>(user,HttpStatus.CREATED);
-//	  }
-	  
-	  
-	  
-	  
-	  @GetMapping("/userDashboard/showTransactions/{userId}")
-	 public ResponseEntity<List<TransactionsDto>> getTransById(@PathVariable("userId") String userId)
+
+	   @GetMapping("/userDashboard/showTransactions/{userId}")
+	   public ResponseEntity<List<TransactionsDto>> getTransById(@PathVariable("userId") String userId)
 		{
 		    Account acc = accService.getUserById(userId);
 		    List<TransactionsDto> merged = this.transService.getTransByPayer(acc.getAccNo());
@@ -165,16 +137,15 @@ public class DashboardController {
 	  
 	  
 	  @PostMapping("/userDashboard/addBeneficiary/{userId}")
-  public ResponseEntity<benefs> addBeneficiary (@Valid @RequestBody benefs ben )
-  {
+	  public ResponseEntity<benefs> addBeneficiary (@Valid @RequestBody benefs ben )
+	  {
 		 Integer add = ben.getBenef();
-		 
-			  
-		  Optional<User1> na1 = this.userrepo.findByaccNo(add);
+		 Optional<User1> na1 = this.userrepo.findByaccNo(add);
 		  if(na1.isEmpty()== true)
 		  {
 			  throw new ResourceNotFoundException("Account Number", " doesnt Exists",add);
 		  }
+		  
 		  else {
 		  benefs created = this.transService.addbenef(ben);
 		  return  new ResponseEntity<>(created,HttpStatus.CREATED);
@@ -188,8 +159,7 @@ public class DashboardController {
 		  Account acc = this.accService.getUserById(userId);
 		  List<benefs> benefs = this.transService.getByAccNo(acc.getAccNo());
 		  return  new ResponseEntity<List<benefs>>(benefs,HttpStatus.CREATED);
-		 
-		  
+	  
 	  }
 	  
 }

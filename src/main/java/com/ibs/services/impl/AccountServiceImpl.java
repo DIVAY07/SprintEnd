@@ -37,7 +37,6 @@ import com.ibs.services.AccountService;
 
 	@Override
 	public AccountDto createAccount(AccountDto accountDto) {
-//		Boolean exists = this.accountRepo.existsById(accountDto.getAccNo()).orElseThrow(()->new ResourceNotFoundException("User","AccNumber",accountDto.getAccNo()));
 		
 		Optional<User1> user1 = this.userrepo.findByaccNo(accountDto.getAccNo());
 		System.out.println(user1.isEmpty());
@@ -46,9 +45,6 @@ import com.ibs.services.AccountService;
 			System.out.println("Not founder");
 			throw new ResourceNotFoundException("User", "Id", accountDto.getAccNo());
 		}
-		
-//		Notapproved nap =  this.accountDto.g
-//				(userId).orElseThrow(()->new ResourceNotFoundException("User", "Id", userId));
 		else {
 			
 		Account account = this.dtoToAccount(accountDto);
@@ -69,6 +65,7 @@ import com.ibs.services.AccountService;
 		return user;
 	}
 
+	
 	
 	private Account dtoToAccount(AccountDto accountDto)
 	{

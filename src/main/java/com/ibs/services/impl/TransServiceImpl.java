@@ -37,18 +37,11 @@ public class TransServiceImpl implements TransactionsService {
 	@Override
 	public TransactionsDto createTrans(TransactionsDto transdto) 
 	{
-		
 		Transactions trans = dtoToTrans(transdto);
-		
-		
-//		 User1 current = this.userrepo.findByaccNo(trans.getPayee());
-//		  User1 current1 = this.userrepo.getById(trans.getPayee());
-//		  current.setAccBalance( current.getAccBalance() - trans.getAmount());		  
-//		  current1.setAccBalance( current1.getAccBalance() + trans.getAmount());
-		 
 		Transactions savedtrans = this.transrepo.save(trans);
 		return transToDto(savedtrans);
 	}
+	
 	
 	@Override
 	public benefs addbenef(benefs ben)
@@ -56,6 +49,7 @@ public class TransServiceImpl implements TransactionsService {
 		benefs created = this.benrepo.save(ben);
 		return created;
 	}
+	
 	
 	@Override 
 	public List<benefs> getByAccNo(Integer acc)
@@ -72,6 +66,7 @@ public class TransServiceImpl implements TransactionsService {
 	}
 	
 	
+	
 	public List<TransactionsDto> getTransByPayer(Integer payee) {
 		// TODO Auto-generated method stub
 		List<Transactions> trans = this.transrepo.findByPayer(payee);
@@ -79,13 +74,13 @@ public class TransServiceImpl implements TransactionsService {
 		return transDtos;
 	}
 
+	
 	public List<TransactionsDto> getTransByReceiver(Integer payee) {
 		// TODO Auto-generated method stub
 		List<Transactions> trans = this.transrepo.findByReceiver(payee);
 		List<TransactionsDto> transDtos=trans.stream().map(tran->this.transToDto(tran)).collect(Collectors.toList());
 		return transDtos;
 	}
-	
 	
 	
 	
