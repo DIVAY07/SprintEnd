@@ -46,7 +46,7 @@ import com.ibs.exceptions.ResourceNotFoundException;
 
 import jakarta.validation.Valid;
 
-
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
 
