@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "UserDetails")
 @NoArgsConstructor
+@AllArgsConstructor
 //@Getter
 //@Setter
 public class User1 {
