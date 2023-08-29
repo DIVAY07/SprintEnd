@@ -25,7 +25,8 @@ import com.ibs.services.AccountService;
 	@Autowired
 	private AccountRepo accountRepo;
 	
-	@Autowired private UserRepo userrepo;
+	@Autowired 
+	private UserRepo userrepo;
 	
 	@Autowired
 	private ModelMapper modelMapper;
@@ -33,7 +34,7 @@ import com.ibs.services.AccountService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	
+	 
 
 	@Override
 	public AccountDto createAccount(AccountDto accountDto) {
@@ -64,6 +65,12 @@ import com.ibs.services.AccountService;
 		
 		return user;
 	}
+	
+	public Account showUserById(String u)
+	{
+		Account userAccount = this.accountRepo.findByUserId(u);
+		return userAccount;
+	}
 
 	
 	
@@ -78,6 +85,11 @@ import com.ibs.services.AccountService;
 		AccountDto accountDto = this.modelMapper.map(account, AccountDto.class);
 		return accountDto;
     }
+	
+	public  AccountServiceImpl(AccountRepo repo)
+	{
+		this.accountRepo = repo;
+	}
 
 	
 }
